@@ -25,6 +25,15 @@ $capsule->addConnection([
 $capsule->setAsGlobal();
 $capsule->bootEloquent();
 
+// Import the table structures from SQL file
+$sqlPath = __DIR__ . '/fortifydotnet.sql';
+if (file_exists($sqlPath)) {
+    Capsule::unprepared(file_get_contents($sqlPath));
+}
+
+$capsule->setAsGlobal();
+$capsule->bootEloquent();
+
 // Create a Laravel Container
 $app = new Container();
 
