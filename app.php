@@ -143,13 +143,5 @@ function log_country_info($ip)
 // Function to render captcha view
 function render_captcha_view()
 {
-    // Implement logic to render captcha view
-    // You may use a template engine or plain PHP
-    // Sample implementation using gregwar/captcha
-    $builder = new CaptchaBuilder;
-    $builder->build();
-    $_SESSION['captcha'] = $builder->getPhrase();
-    header('Content-type: image/jpeg');
-    $builder->output();
-    exit;
+    header('Location: captcha/captcha.html');
 }
