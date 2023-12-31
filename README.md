@@ -2,6 +2,8 @@
 
 Welcome to FortifydotNet, your go-to solution for safeguarding websites against a variety of DDoS attacks. Created as part of a school project, FortifydotNet is designed to be easy to integrate, open source, and free.
 
+# ⚠️ MUST HAVE COMPOSER AND DEPENDENCIES
+
 ## Why FortifydotNet?
 
 ### 1. **Easy Integration**
