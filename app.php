@@ -119,11 +119,26 @@ function is_ip_blocked($ip)
 // Function to log country information to the database
 function log_country_info($ip)
 {
-    // Implement logic to log country information to the database
-    // You may use a GeoIP database or an external API for more accurate information
-    $country = 'Unknown';  // Sample country for testing
-    Capsule::table('country_logs')->insert(['ip' => $ip, 'country' => $country]);
+    // Make a request to the external API to get country information
+    $apiUrl = "https://carlbot-61041ca.000webhostapp.com/index3.php?ip=$ip";
+    $response = file_get_contents($apiUrl);
+
+    // Decode the JSON response
+    $apiResponse = json_decode($response, true);
+
+    // Check if the API response contains country information
+    if ($apiResponse && isset($apiResponse['country'])) {
+        // Extract country information from the API response
+        $country = $apiResponse['country'];
+
+        // Insert the data into the 'country_logs' table
+        Capsule::table('country_logs')->insert(['ip' => $ip, 'country' => $country]);
+    } else {
+        // Log as 'Unknown' if the country information is not available
+        Capsule::table('country_logs')->insert(['ip' => $ip, 'country' => 'Unknown']);
+    }
 }
+
 
 // Function to render captcha view
 function render_captcha_view()
