@@ -1,0 +1,29 @@
+<!-- captcha.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Captcha Example</title>
+</head>
+<body>
+    <h1>Captcha Verification</h1>
+    
+    <form id="captchaForm">
+        <label for="captchaInput">Enter the text from the image:</label>
+        <input type="text" id="captchaInput" name="captchaInput" required>
+        
+        <img id="captchaImage" src="generate-captcha.php" alt="Captcha Image">
+        
+        <button type="submit">Submit</button>
+    </form>
+
+    <script>
+        // Reload captcha image when clicking on it
+        document.getElementById('captchaImage').addEventListener('click', function() {
+            this.src = 'generate-captcha.php?' + new Date().getTime(); // Append timestamp to force reload
+        });
+    </script>
+</body>
+</html>
