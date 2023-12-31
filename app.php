@@ -60,15 +60,24 @@ $router->middleware('throttle:5,1')->get('/', function () {
 });
 
 // Security Measure 2: Captcha Prompt for High IP Counts
-$router->get('/protected', function () {
-    // Check IP count and prompt captcha if exceeded
-    if (get_connected_ip_count() > 5) {  // Adjust the limit as needed
-        return render_captcha_view();
+function is_ip_blocked($ip)
+{
+    $apiKey = YOURAPIKEY //Make sure that you're adding the API key.
+    // Use the VPNAPI to check if the IP is associated with a VPN
+    $vpnCheckUrl = "https://vpnapi.io/api/$ip?key=$apiKey";
+    $response = file_get_contents($vpnCheckUrl);
+
+    // Decode the JSON response
+    $vpnInfo = json_decode($response, true);
+
+    // Check if the IP is associated with a VPN
+    if ($vpnInfo && isset($vpnInfo['security']['is_vpn']) && $vpnInfo['security']['is_vpn']) {
+        return true;  // IP is associated with a VPN
     }
 
-    // Your protected page logic here
-    return 'This is a protected page!';
-});
+    // Check if the IP is blocked in your local database
+    return Capsule::table('blocked_ips')->where('ip', $ip)->exists();
+}
 
 // Security Measure 3: Blocking VPNs, Proxies, and Spoofed IPs
 $router->before(function () {
