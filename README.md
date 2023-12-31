@@ -12,6 +12,9 @@ FortifydotNet seamlessly integrates into your website, offering hassle-free prot
 
 Our commitment to online security is reflected in FortifydotNet being open source and freely accessible. We believe in providing robust cybersecurity measures without breaking the bank.
 
+### 3. **Extremely Fast**
+With only ~200 lines of code, it runs extremely fast on most websites.
+
 ## Key Security Measures
 
 ### Security Measure 1: IP Monitoring and Rate Limiting
